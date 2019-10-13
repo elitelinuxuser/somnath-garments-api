@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator/check");
+const admin = require("../../middleware/admin");
 
 const User = require("../../models/User");
 
@@ -84,5 +85,11 @@ router.post(
     }
   }
 );
+
+router.get("/all", admin, async (req, res) => {
+  User.find({}).then(users => {
+    return res.json(users);
+  });
+});
 
 module.exports = router;
