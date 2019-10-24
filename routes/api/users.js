@@ -87,7 +87,7 @@ router.post(
 );
 
 router.get("/all", admin, async (req, res) => {
-  User.find({}).then(users => {
+  User.find({ admin: false }).then(users => {
     return res.json(users);
   });
 });
